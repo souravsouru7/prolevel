@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 export function Navbar() {
@@ -31,27 +32,26 @@ export function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-black/40 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-cyan-500/5"
+          ? "bg-black/40 backdrop-blur-xl shadow-lg shadow-cyan-500/5"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative"
+              className="relative h-10 w-auto flex items-center"
             >
-              <span className="text-2xl font-playfair font-bold bg-gradient-to-r from-cyan-400 via-pink-400 to-orange-400 bg-clip-text text-transparent tracking-tight">
-                LUXE
-              </span>
-              <motion.div
-                className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-cyan-400/0 via-pink-400/60 to-orange-400/0"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={100}
+                height={40}
+                className="object-contain"
+                priority
               />
             </motion.div>
           </Link>
@@ -63,7 +63,7 @@ export function Navbar() {
                 <motion.span
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="relative text-white/70 hover:text-white transition-colors duration-300 font-cormorant font-medium cursor-pointer group"
+                  className="relative text-white/80 hover:text-white transition-colors duration-300 font-cormorant font-medium cursor-pointer group text-base"
                 >
                   {link.name}
                   <motion.span
@@ -75,11 +75,11 @@ export function Navbar() {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center">
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(236, 72, 153, 0.3)" }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 rounded-full bg-gradient-to-r from-pink-500 via-pink-400 to-orange-400 text-white font-cormorant font-semibold shadow-lg shadow-pink-500/20 transition-all duration-300 border border-white/10"
+              className="px-6 py-2.5 rounded-full bg-gradient-to-r from-pink-500 via-pink-400 to-orange-400 text-white font-cormorant font-semibold shadow-lg shadow-pink-500/20 transition-all duration-300 border border-white/10 text-sm"
             >
               Get Started
             </motion.button>

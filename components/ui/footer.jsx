@@ -2,6 +2,7 @@
 
 import { ArrowUp, Mail, Twitter, Instagram, Linkedin, Github, Facebook, Heart } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 function handleScrollTop() {
   window.scroll({
@@ -65,14 +66,18 @@ const Footer = () => {
       {/* Top Section */}
       <div className="relative mx-auto grid max-w-7xl items-center justify-center gap-4 p-4 pb-0 md:flex">
         <Link href="/">
-          <p className="flex items-center justify-center rounded-full">
-            <span className="text-3xl font-playfair font-bold bg-gradient-to-r from-cyan-400 via-pink-400 to-orange-400 bg-clip-text text-transparent">
-              LUXE
-            </span>
-          </p>
+          <div className="flex items-center justify-center">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={150}
+              height={50}
+              className="object-contain"
+            />
+          </div>
         </Link>
         <p className="bg-transparent text-center text-xs leading-4 text-cyan-100/60 md:text-left font-cormorant">
-          Welcome to LUXE, where creativity meets innovation. We transform ideas into compelling visual experiences with cutting-edge technology. Specializing in immersive digital experiences and engaging animations that resonate with your audience. Our mission is to empower creators to stand out in a crowded market through the power of design, emotion, and meaningful connections.
+          Welcome to our platform, where creativity meets innovation. We transform ideas into compelling visual experiences with cutting-edge technology. Specializing in immersive digital experiences and engaging animations that resonate with your audience. Our mission is to empower creators to stand out in a crowded market through the power of design, emotion, and meaningful connections.
         </p>
       </div>
 
@@ -183,7 +188,7 @@ const Footer = () => {
               className="font-bold"
               href="#"
             >
-              LUXE Team
+              Our Team
             </Link>
           </span>
           <span>-</span>

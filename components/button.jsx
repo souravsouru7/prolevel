@@ -6,8 +6,9 @@ const AnimatedLayerButton = React.forwardRef(({ className, children, ...props },
     <button
       className={cn(
         // Base styles for the button
-        "group relative flex h-[50px] w-[180px] items-center justify-center overflow-hidden rounded-[30px] border-none",
-        "cursor-pointer bg-gradient-to-r from-cyan-400 via-pink-400 to-orange-400 transition-all duration-300 ease-in-out",
+        "group relative flex h-[50px] w-[180px] items-center justify-center overflow-hidden rounded-[30px] border border-white/10",
+        "cursor-pointer bg-black/40 backdrop-blur-xl transition-all duration-300 ease-in-out",
+        "hover:border-pink-400/50 hover:bg-black/60 hover:scale-105",
         // Accessibility focus styles
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2",
         "disabled:pointer-events-none disabled:opacity-50",
@@ -50,8 +51,8 @@ const AnimatedLayerButton = React.forwardRef(({ className, children, ...props },
           d="M607.55,553.77c5.13,3.72,10.28,7.42,15.4,11.15l124.12,90.24a8.57,8.57,0,0,1,1.2.84c1.26,1.27,2.35,1.09,3.77,0,6.36-4.74,12.82-9.35,19.24-14l118.23-85.89c1.07-.78,2.17-1.54,3.28-2.32.82,1.1,0,2-.27,2.77Q866.29,637.48,840,718.38c-1.11,3.42-1.13,3.42,1.81,5.56l136,98.81c1.17.86,2.33,1.74,3.79,2.83-1.48.73-2.79.45-4,.45q-84.07,0-168.16,0h-.73c-3.7,0-3.68,0-4.8,3.43q-26.1,80.4-52.23,160.78c-.4,1.21-.45,2.66-1.77,3.6L735,948.24q-19.34-59.52-38.68-119c-1-3.16-1-3.17-4.6-3.17q-84.27,0-168.53,0a10.57,10.57,0,0,1-4.24-.34,13.17,13.17,0,0,1,3.33-2.77q67.55-49.08,135.1-98.18c5-3.63,4.38-1.8,2.43-7.83q-25.94-80.07-52-160.11c-.3-.91-.57-1.83-.85-2.75Z"
           transform="translate(-202.29 -201.89)" />
       </svg>
-      {/* Text layer that becomes transparent on hover */}
-      <span className="z-10 font-semibold text-black transition-colors duration-300 group-hover:text-transparent text-[1.1em]">
+      {/* Text layer */}
+      <span className="z-10 font-semibold bg-gradient-to-r from-cyan-400 via-pink-400 to-orange-400 bg-clip-text text-transparent group-hover:from-white group-hover:via-white group-hover:to-white transition-all duration-300 text-[1.1em]">
         {children}
       </span>
     </button>

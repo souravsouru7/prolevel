@@ -3,6 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Award, Users, TrendingUp, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { InfiniteSlider } from "@/components/ui/infinite-slider";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -32,12 +34,12 @@ const testimonials = [
 ];
 
 const clients = [
-  { name: "TechCorp", logo: "TC" },
-  { name: "Design Co", logo: "DC" },
-  { name: "StartUp X", logo: "SX" },
-  { name: "Creative Labs", logo: "CL" },
-  { name: "Digital Pro", logo: "DP" },
-  { name: "Innovation Hub", logo: "IH" },
+  { name: "Client 1", logo: "/logo.png" },
+  { name: "Client 2", logo: "/logo.png" },
+  { name: "Client 3", logo: "/logo.png" },
+  { name: "Client 4", logo: "/logo.png" },
+  { name: "Client 5", logo: "/logo.png" },
+  { name: "Client 6", logo: "/logo.png" },
 ];
 
 const stats = [
@@ -202,7 +204,7 @@ export function SocialProofSection() {
           </div>
         </div>
 
-        {/* Client Logos */}
+        {/* Client Logos Slider */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -213,23 +215,22 @@ export function SocialProofSection() {
           <p className="text-cyan-100/50 font-cormorant text-sm mb-8">
             Trusted by leading brands
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8">
+          <InfiniteSlider gap={24} duration={30} className="py-4">
             {clients.map((client, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                whileHover={{ scale: 1.1 }}
-                className="w-20 h-20 flex items-center justify-center rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 hover:border-pink-400/30 transition-all duration-300"
+                className="flex items-center justify-center w-32 h-20 rounded-xl bg-gradient-to-br from-white/5 to-white/0 border border-white/10 hover:border-pink-400/30 transition-all duration-300 px-4"
               >
-                <span className="text-2xl font-playfair font-bold bg-gradient-to-r from-cyan-300 to-pink-300 bg-clip-text text-transparent">
-                  {client.logo}
-                </span>
-              </motion.div>
+                <Image
+                  src={client.logo}
+                  alt={client.name}
+                  width={100}
+                  height={40}
+                  className="object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+                />
+              </div>
             ))}
-          </div>
+          </InfiniteSlider>
         </motion.div>
 
         {/* Awards Badge */}
