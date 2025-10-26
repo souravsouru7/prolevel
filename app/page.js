@@ -1,4 +1,8 @@
 import SyntheticHero from "@/components/synthetic-hero";
+import { BenefitsSection } from "@/components/benefits-section";
+import { SocialProofSection } from "@/components/social-proof-section";
+import { FAQSection } from "@/components/faq-section";
+import { FooterSection } from "@/components/footer-section";
 
 export default function Home() {
   return (
@@ -18,6 +22,10 @@ export default function Home() {
           "Responsive, tactile feedback",
         ]}
       />
+      <BenefitsSection />
+      <SocialProofSection />
+      <FAQSection />
+      <FooterSection />
     </div>
   );
 }

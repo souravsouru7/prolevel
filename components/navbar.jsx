@@ -31,7 +31,7 @@ export function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-black/80 backdrop-blur-lg border-b border-white/10"
+          ? "bg-black/40 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-cyan-500/5"
           : "bg-transparent"
       }`}
     >
@@ -42,9 +42,17 @@ export function Navbar() {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-sky-400 bg-clip-text text-transparent"
+              className="relative"
             >
-              LOGO
+              <span className="text-2xl font-playfair font-bold bg-gradient-to-r from-cyan-400 via-pink-400 to-orange-400 bg-clip-text text-transparent tracking-tight">
+                LUXE
+              </span>
+              <motion.div
+                className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-cyan-400/0 via-pink-400/60 to-orange-400/0"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              />
             </motion.div>
           </Link>
 
@@ -53,11 +61,14 @@ export function Navbar() {
             {navLinks.map((link, index) => (
               <Link key={index} href={link.href}>
                 <motion.span
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="text-white/80 hover:text-white transition-colors duration-200 font-medium cursor-pointer"
+                  className="relative text-white/70 hover:text-white transition-colors duration-300 font-cormorant font-medium cursor-pointer group"
                 >
                   {link.name}
+                  <motion.span
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-gradient-to-r from-cyan-400/0 via-pink-400/80 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  />
                 </motion.span>
               </Link>
             ))}
@@ -66,9 +77,9 @@ export function Navbar() {
           {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(236, 72, 153, 0.3)" }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-semibold shadow-lg hover:shadow-emerald-500/50 transition-all duration-300"
+              className="px-6 py-2 rounded-full bg-gradient-to-r from-pink-500 via-pink-400 to-orange-400 text-white font-cormorant font-semibold shadow-lg shadow-pink-500/20 transition-all duration-300 border border-white/10"
             >
               Get Started
             </motion.button>
@@ -78,7 +89,7 @@ export function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white/80 hover:text-white transition-colors"
+              className="text-white/70 hover:text-white transition-colors p-2"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -94,7 +105,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-black/95 backdrop-blur-lg border-t border-white/10"
+            className="md:hidden bg-black/95 backdrop-blur-xl border-t border-white/10"
           >
             <div className="px-4 py-6 space-y-4">
               {navLinks.map((link, index) => (
@@ -104,7 +115,7 @@ export function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-white/80 hover:text-white transition-colors duration-200 font-medium py-2"
+                    className="block text-white/70 hover:text-white transition-colors duration-300 font-cormorant font-medium py-2"
                   >
                     {link.name}
                   </motion.div>
@@ -115,7 +126,7 @@ export function Navbar() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-semibold shadow-lg"
+                className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 via-pink-400 to-orange-400 text-white font-cormorant font-semibold shadow-lg shadow-pink-500/20 border border-white/10"
               >
                 Get Started
               </motion.button>

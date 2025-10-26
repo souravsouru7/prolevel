@@ -1,11 +1,12 @@
-"use client";;
+"use client";
+
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
-import { Button } from "@/components/ui/button";
+import { AnimatedLayerButton } from "@/components/button";
 import { Badge } from "@/components/ui/badge";
 
 gsap.registerPlugin(SplitText, useGSAP);
@@ -94,7 +95,19 @@ const fragmentShader = `
 
       c /= 8.0;
 
-      vec3 baseColor = vec3(0.2, 0.7, 0.5);
+      // COLOR PALETTE: Electric Blue/Cyan → Hot Pink/Magenta → Bright Orange/Yellow
+      vec3 cyan = vec3(0.0, 1.0, 1.0);      // #00FFFF
+      vec3 magenta = vec3(1.0, 0.0, 1.0);   // #FF00FF
+      vec3 orange = vec3(1.0, 0.65, 0.0);   // Bright Orange/Yellow
+      
+      float colorMix = c * 0.6;
+      vec3 baseColor;
+      if (colorMix < 0.5) {
+          baseColor = mix(cyan, magenta, colorMix * 2.0);
+      } else {
+          baseColor = mix(magenta, orange, (colorMix - 0.5) * 2.0);
+      }
+      
       vec3 finalColor = baseColor * smoothstep(0.0, 1.0, c * 0.6);
 
       fragColor = vec4(finalColor, 1.0);
@@ -214,12 +227,15 @@ const SyntheticHero = ({
             <div className="relative z-10 flex flex-col items-center text-center px-6">
 				<div ref={badgeWrapperRef}>
 					<Badge
-                        className="mb-6 bg-white/10 hover:bg-white/15 text-emerald-300 backdrop-blur-md border border-white/20 uppercase tracking-wider font-medium flex items-center gap-2 px-4 py-1.5">
-						<span className="text-[10px] font-light tracking-[0.18em] text-emerald-100/80">
+                        className="mb-6 bg-white/10 hover:bg-white/15 text-cyan-300 backdrop-blur-md border border-cyan-400/30 uppercase tracking-wider font-medium flex items-center gap-2 px-4 py-1.5">
+						<span 
+                            className="text-[10px] font-light tracking-[0.18em] text-cyan-100/80">
 							{badgeLabel}
 						</span>
-						<span className="h-1 w-1 rounded-full bg-emerald-200/60" />
-						<span className="text-xs font-light tracking-tight text-emerald-200">
+						<span 
+                            className="h-1 w-1 rounded-full bg-pink-400/80" />
+						<span 
+                            className="text-xs font-light tracking-tight text-pink-200">
 							{badgeText}
 						</span>
 					</Badge>
@@ -227,53 +243,46 @@ const SyntheticHero = ({
 
 				<h1
                     ref={headingRef}
-                    className="text-5xl md:text-7xl max-w-4xl font-light tracking-tight text-white mb-4">
+                    className="text-5xl md:text-7xl max-w-4xl font-playfair font-semibold tracking-tight text-white mb-4"
+                    style={{
+                        textShadow: '0 0 40px rgba(255,255,255,0.15), 0 0 80px rgba(255,255,255,0.1)',
+                    }}>
 					{title}
 				</h1>
 
 				<p
                     ref={paragraphRef}
-                    className="text-emerald-50/80 text-lg max-w-2xl mx-auto mb-10 font-light">
+                    className="text-cyan-50/90 text-lg max-w-2xl mx-auto mb-10 font-cormorant font-light">
 					{description}
 				</p>
 
 				<div ref={ctaRef} className="flex flex-wrap items-center justify-center gap-4">
 					{ctaButtons.map((button, index) => {
-						const isPrimary = button.primary ?? index === 0;
-						const classes = isPrimary
-							? "px-8 py-3 rounded-xl text-base font-medium backdrop-blur-lg bg-emerald-400/80 hover:bg-emerald-300/80 shadow-lg transition-all cursor-pointer"
-							: "px-8 py-3 rounded-xl text-base font-medium border-white/30 text-white hover:bg-white/10 backdrop-blur-lg transition-all cursor-pointer";
-
 						if (button.href) {
 							return (
-                                <Button
-                                    key={index}
-                                    variant={isPrimary ? undefined : "outline"}
-                                    className={classes}
-                                    asChild>
-                                    <a href={button.href}>{button.text}</a>
-                                </Button>
-                            );
+								<a key={index} href={button.href}>
+									<AnimatedLayerButton className="font-playfair">
+										{button.text}
+									</AnimatedLayerButton>
+								</a>
+							);
 						}
 
 						return (
-                            <Button
-                                key={index}
-                                variant={isPrimary ? undefined : "outline"}
-                                className={classes}>
-                                {button.text}
-                            </Button>
-                        );
+							<AnimatedLayerButton key={index} className="font-playfair">
+								{button.text}
+							</AnimatedLayerButton>
+						);
 					})}
 				</div>
 
 				{microDetails.length > 0 && (
 					<ul
                         ref={microRef}
-                        className="mt-8 flex flex-wrap justify-center gap-6 text-xs font-light tracking-tight text-emerald-100/70">
+                        className="mt-8 flex flex-wrap justify-center gap-6 text-xs font-light tracking-tight text-cyan-100/70">
 						{microDetails.map((detail, index) => (
 							<li key={index} className="flex items-center gap-2">
-								<span className="h-1 w-1 rounded-full bg-emerald-200/60" />
+								<span className="h-1 w-1 rounded-full bg-orange-400/80" />
 								{detail}
 							</li>
 						))}
