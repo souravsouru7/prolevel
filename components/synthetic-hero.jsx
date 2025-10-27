@@ -124,7 +124,7 @@ const fragmentShader = `
 const SyntheticHero = ({
     title = "An experiment in light, motion, and the quiet chaos between.",
     description = "Experience a new dimension of interaction — fluid, tactile, and alive. Designed for creators who see beauty in motion.",
-    badgeText = "React Three Fiber",
+    badgeText = "Welcome Craftsman Creations",
     badgeLabel = "Experience",
 
     ctaButtons = [
